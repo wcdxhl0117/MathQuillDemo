@@ -31,6 +31,10 @@
   <script type="text/javascript" src="./src/jquery.js"></script>
   <script type="text/javascript" src="./src/mathquill.js"></script>
   <script type="text/javascript">
+    // setTimeout(function() {
+    //   $("#basic textarea").eq(0).focus()
+    // },20)
+    
     MQ = MathQuill.getInterface(MathQuill.getInterface.MAX);
     var mq = MQ.MathField($('#basic')[0], {
       autoSubscriptNumerals: true,
@@ -40,6 +44,15 @@
         }
       }
     });
+    // \frac{ }{ }
+    // 聚焦
+    mq.focus()
+
+    // 写入字符串到光标位置
+    setTimeout(function() {
+      mq.write('(\\frac12y)^4\\div (-\\frac12y)')
+    }, 100)
+    
     var latex = $('#basic-latex').bind('keydown keypress', function () {
       var prev = latex.val();
       setTimeout(function () {
