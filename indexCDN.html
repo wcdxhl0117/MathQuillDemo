@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <title>MathQuill-basic Demo</title>
+  <link href="https://cdn.bootcss.com/mathquill/0.10.1/mathquill.min.css" rel="stylesheet">
+  <script type="text/javascript">
+    document.documentElement.style.fontSize = document.documentElement.clientWidth / 7.5 + "px";
+    window.addEventListener("resize", function () {
+      document.documentElement.style.fontSize = document.documentElement.clientWidth / 7.5 + "px";
+    }, false);
+  </script>
+</head>
+<style>
+  #basic {
+    padding: 0.2rem 0;
+    width: 100%;
+    font-size: 0.36rem;
+    overflow-x: auto;
+  }
+</style>
+
+<body>
+  <div id="body">
+    <p>
+      <span id="basic"></span>
+    </p>
+    <p>
+      <textarea id="basic-latex"></textarea>
+    </p>
+    <p id="add">加入LaTeX编码</p>
+  </div>
+  <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.slim.min.js"></script>
+  <script src="https://cdn.bootcss.com/mathquill/0.10.1/mathquill.min.js"></script>
+  <script type="text/javascript">
+    // setTimeout(function() {
+    //   $("#basic textarea").eq(0).focus()
+    // },20)
+    setTimeout(function () {
+      MQ = MathQuill.getInterface(MathQuill.getInterface.MAX);
+      var mq = MQ.MathField($('#basic')[0], {
+        autoSubscriptNumerals: true,
+        handlers: {
+          edit: function () {
+            if (!latex.is(':focus')) latex.val(mq.latex());
+          }
+        }
+      });
+      // \frac{ }{ }
+      // 聚焦
+      mq.focus()
+
+      // 写入字符串到光标位置
+      setTimeout(function () {
+        mq.write('(\\frac12y)^4\\div (-\\frac12y)')
+      }, 100)
+
+      var latex = $('#basic-latex').bind('keydown keypress', function () {
+        var prev = latex.val();
+        setTimeout(function () {
+          var now = latex.val();
+          if (now !== prev) mq.latex(now);
+        });
+      });
+      latex.val(mq.latex());
+
+      $("#add").click(function () {
+        mq.write('(\\frac12y)^4\\div (-\\frac12y)')
+      })
+    }, 100)
+
+  </script>
+</body>
+
+</html>
