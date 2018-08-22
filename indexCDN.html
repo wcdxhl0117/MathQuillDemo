@@ -30,14 +30,11 @@
     <p>
       <textarea id="basic-latex"></textarea>
     </p>
-    <p id="add">加入LaTeX编码</p>
+    <!-- <p id="add">Add LaTeX encoding</p> -->
   </div>
-  <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.slim.min.js"></script>
+  <script src="https://cdn.bootcss.com/jquery/1.7.2/jquery.min.js"></script>
   <script src="https://cdn.bootcss.com/mathquill/0.10.1/mathquill.min.js"></script>
   <script type="text/javascript">
-    // setTimeout(function() {
-    //   $("#basic textarea").eq(0).focus()
-    // },20)
     setTimeout(function () {
       MQ = MathQuill.getInterface(MathQuill.getInterface.MAX);
       var mq = MQ.MathField($('#basic')[0], {
@@ -49,15 +46,14 @@
         }
       });
       // \frac{ }{ }
-      // 聚焦
       mq.focus()
 
-      // 写入字符串到光标位置
+      // Write string to cursor position
       setTimeout(function () {
         mq.write('(\\frac12y)^4\\div (-\\frac12y)')
       }, 100)
 
-      var latex = $('#basic-latex').bind('keydown keypress', function () {
+      var latex = $('#basic-latex').bind('keydown keypress keyup', function () {
         var prev = latex.val();
         setTimeout(function () {
           var now = latex.val();
@@ -66,10 +62,10 @@
       });
       latex.val(mq.latex());
 
-      $("#add").click(function () {
-        mq.write('(\\frac12y)^4\\div (-\\frac12y)')
-      })
-    }, 100)
+      // $("#add").click(function () {
+      //   mq.write('(\\frac12y)^4\\div (-\\frac12y)')
+      // })
+    }, 20)
 
   </script>
 </body>
