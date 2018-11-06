@@ -1,14 +1,15 @@
 .mq-editable-field.mq-focused,
 .mq-math-mode .mq-editable-field.mq-focused {
   border-color: #78C008;
-	border-left: 2px solid #78C008!important;
+	border-left: 1px solid #78C008!important;
 	margin-left: -1px!important;
 	margin-right: -1px!important;
 	opacity: 1!important;
 	-webkit-transition: opacity .5s ease-out!important;
 	-moz-transition: opacity .5s ease-out!important;
 	transition: opacity .5s ease-out!important;
-	visibility: visible!important
+	visibility: visible!important;
+	box-shadow: #78C008 0 0 1px 1px, inset #78C008 0 0 1px 0;
 }
 .echo-slide-and-fade-enter {
 	opacity: 1!important;
@@ -56,7 +57,7 @@
 	vertical-align: middle!important
 }
 
-  .mq-editable-field .mq-cursor {
+.mq-editable-field .mq-cursor {
 	border-color: #78C008;
 	border-left: 2px solid #78C008!important;
 	margin-left: -1px!important;
