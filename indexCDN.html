@@ -37,6 +37,8 @@
   </div>
   <script src="https://cdn.bootcss.com/jquery/1.7.2/jquery.min.js"></script>
   <script src="https://cdn.bootcss.com/mathquill/0.10.1/mathquill.min.js"></script>
+  <!--  ASCIImath to Latex -->
+  <script src="./acc.js"></script>
   <script type="text/javascript">
     setTimeout(function () {
       MQ = MathQuill.getInterface(MathQuill.getInterface.MAX);
@@ -52,8 +54,10 @@
       mq.focus()
 
       // Write string to cursor position
+      var str = '(1)/(3)';
       setTimeout(function () {
-        mq.write('\\frac{ }{ }')
+        str = AMTparseAMtoTeX(str)
+        mq.write(str)
       }, 100)
       
       // 删除方法找到（模拟按键的方式）

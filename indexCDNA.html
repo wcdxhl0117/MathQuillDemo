@@ -28,14 +28,18 @@
 <body>
   <div id="body">
    <p><span id="problem">(x)/(y)</span></p>
+   <p><math><mn>1</mn><mo>+</mo><mn>2</mn></math></p>
   </div>
   <script src="https://cdn.bootcss.com/jquery/1.7.2/jquery.min.js"></script>
   <script src="https://cdn.bootcss.com/mathquill/0.10.1/mathquill.min.js"></script>
+  <script src="./acc.js"></script>
   <script type="text/javascript">
     setTimeout(function () {
-      var MQ = MathQuill.getInterface(2);
-      var problemSpan = document.getElementById('problem');
-      MQ.StaticMath(problemSpan);
+      // const asciimath2latex = require('asciimath-to-latex')
+      const asciimath = '(1)/(2)'
+      console.log(`asciimath: ${asciimath}`)
+      const latex = AMTparseAMtoTeX(asciimath)
+      console.log(`latex: ${latex}`)
     }, 20)
 
   </script>
