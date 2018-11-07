@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <title>公式可视化Demo</title>
+  <script type="text/javascript">
+    document.documentElement.style.fontSize = document.documentElement.clientWidth / 7.5 + "px";
+    window.addEventListener("resize", function () {
+      document.documentElement.style.fontSize = document.documentElement.clientWidth / 7.5 + "px";
+    }, false);
+  </script>
+</head>
+<style>
+  *{
+    padding: 0;
+    margin: 0;
+  }
+  #body{
+    height: auto !important;
+    padding: 0;
+    margin: 0;
+  }
+  #basic {
+    padding: 0.2rem 0;
+    width: 96%;
+    height: auto;
+    font-size: 0.46rem;
+    overflow-x: auto;
+    border: none;
+  }
+</style>
+
+<body>
+  <div id="body">
+    <p class="basicWrap">
+      <span id="basic"></span>
+    </p>
+    <p class="txtsss">
+      <textarea id="basic-latex"></textarea>
+    </p>
+  </div>
+  <script src="https://cdn.bootcss.com/jquery/1.7.2/jquery.min.js"></script>
+  <script type="text/javascript">
+
+    //写入字符串
+    function WriteContent(str) {
+        console.log('调用写入功能成功') 
+    }
+    
+    // 删除的方法
+    function deleteContent() {
+        console.log('调用删除功能成功') 
+    }
+
+    // 移动光标
+    function moveBlink() {
+      console.log('调用移动光标功能成功')
+    }
+    
+    // 确认按钮（提交输入结果给native）
+    function sureGet() {
+      console.log('调用确认按钮，传123456给native')
+      window.stub.jsCallBack('123456');
+    }
+
+
+  </script>
+</body>
+
+</html>
