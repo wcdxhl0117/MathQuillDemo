@@ -59,12 +59,12 @@
         str = AMTparseAMtoTeX(str)
         mq.write(str)
       }, 100)
-      
+
       // 删除方法找到（模拟按键的方式）
-      setInterval(function(){
+      setInterval(function () {
         // mq.keystroke('Backspace')
         mq.keystroke('Right')
-      },1000)
+      }, 1000)
 
       var latex = $('#basic-latex').bind('keydown keypress keyup', function () {
         var prev = latex.val();
@@ -74,15 +74,36 @@
         });
       });
       latex.val(mq.latex());
-      
+
       $("#add").click(function () {
         // 这个和write类似
         mq.cmd('\\sqrt');
         // 模拟键盘键
         mq.keystroke('Shift-Left');
       })
-    }, 20)
 
+
+      var startX, startY, moveEndX, moveEndY, X, Y, oldMoveEndX;
+      $("#basic").on("touchstart", function (e) {
+        e.preventDefault();
+        startX = e.originalEvent.changedTouches[0].pageX,
+          startY = e.originalEvent.changedTouches[0].pageY;
+      });
+
+      $("#basic").on("touchmove", function (e) {
+        e.preventDefault();
+        moveEndX = e.originalEvent.changedTouches[0].pageX,
+          moveEndY = e.originalEvent.changedTouches[0].pageY,
+          X = moveEndX - startX,
+          Y = moveEndY - startY;
+        if (moveEndX - oldMoveEndX > 0) {
+          mq.keystroke('Shift-Right');
+        } else if (moveEndX - oldMoveEndX < 0) {
+          mq.keystroke('Shift-Left');
+        }
+        oldMoveEndX = moveEndX;
+      });
+    }, 20)
   </script>
 </body>
 
