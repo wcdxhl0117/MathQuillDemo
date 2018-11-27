@@ -278,28 +278,36 @@
     }
 
     // 输入框光标touch移动
-    // var startX, startY, moveEndX, moveEndY, X, Y, oldMoveEndX;
-    // $("#basic").on("touchstart", function (e) {
-    //   startX = e.originalEvent.changedTouches[0].pageX,
-    //     startY = e.originalEvent.changedTouches[0].pageY;
-    // });
-    // var off = true;
-    // setInterval(function () {
-    //   off = !off;
-    // }, 100)
-    // $("#basic").on("touchmove", function (e) {
-    //   if (off) {
-    //     e.preventDefault();
-    //     moveEndX = e.originalEvent.changedTouches[0].pageX,
-    //     moveEndY = e.originalEvent.changedTouches[0].pageY;
-    //     if (moveEndX - oldMoveEndX > 0) {
-    //       mq.keystroke('Right');
-    //     } else if (moveEndX - oldMoveEndX < 0) {
-    //       mq.keystroke('Left');
-    //     }
-    //     oldMoveEndX = moveEndX;
-    //   }
-    // });
+    var off = true;
+    var timerT = null;
+    var startX, startY, moveEndX, moveEndY, X, Y, oldMoveEndX;
+    $("#basic").on("touchstart", function (e) {
+      timerT =  setInterval(function () {
+        off = !off;
+      }, 100)
+      // startX = e.originalEvent.changedTouches[0].pageX,
+      //   startY = e.originalEvent.changedTouches[0].pageY;
+    });
+    
+    $("#basic").on("touchmove", function (e) {
+      if (off) {
+        off = !off;
+        e.preventDefault();
+        moveEndX = e.originalEvent.changedTouches[0].pageX,
+        moveEndY = e.originalEvent.changedTouches[0].pageY;
+        if (moveEndX - oldMoveEndX > 0) {
+          mq.keystroke('Right');
+        } else if (moveEndX - oldMoveEndX < 0) {
+          mq.keystroke('Left');
+        }
+        oldMoveEndX = moveEndX;
+      }
+    });
+
+    $("#basic").on("touchend", function (e) {
+      clearInterval(timerT);
+      off = true;
+    });
 
 
     var config = {

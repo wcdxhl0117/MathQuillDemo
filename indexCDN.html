@@ -54,9 +54,9 @@
       mq.focus()
 
       // Write string to cursor position
-      var str = '(1)/(3)';
+      var str = '\\frac{ }{ }';
       setTimeout(function () {
-        str = AMTparseAMtoTeX(str)
+        // str = AMTparseAMtoTeX(str)
         mq.write(str)
       }, 100)
 
@@ -83,26 +83,29 @@
       })
 
 
-      var startX, startY, moveEndX, moveEndY, X, Y, oldMoveEndX;
-      $("#basic").on("touchstart", function (e) {
-        e.preventDefault();
-        startX = e.originalEvent.changedTouches[0].pageX,
-          startY = e.originalEvent.changedTouches[0].pageY;
-      });
+      // var startX, startY, moveEndX, moveEndY, X, Y, oldMoveEndX;
+      // $("#basic").on("touchstart", function (e) {
+      //   startX = e.originalEvent.changedTouches[0].pageX,
+      //     startY = e.originalEvent.changedTouches[0].pageY;
+      // });
+      // var off = true;
+      // setInterval(function () {
+      //   off = !off;
+      // }, 60)
+      // $("#basic").on("touchmove", function (e) {
+      //   if (off) {
+      //     e.preventDefault();
+      //     moveEndX = e.originalEvent.changedTouches[0].pageX,
+      //     moveEndY = e.originalEvent.changedTouches[0].pageY;
+      //     if (moveEndX - oldMoveEndX > 0) {
+      //       mq.keystroke('Right');
+      //     } else if (moveEndX - oldMoveEndX < 0) {
+      //       mq.keystroke('Left');
+      //     }
+      //     oldMoveEndX = moveEndX;
+      //   }
+      // });
 
-      $("#basic").on("touchmove", function (e) {
-        e.preventDefault();
-        moveEndX = e.originalEvent.changedTouches[0].pageX,
-          moveEndY = e.originalEvent.changedTouches[0].pageY,
-          X = moveEndX - startX,
-          Y = moveEndY - startY;
-        if (moveEndX - oldMoveEndX > 0) {
-          mq.keystroke('Shift-Right');
-        } else if (moveEndX - oldMoveEndX < 0) {
-          mq.keystroke('Shift-Left');
-        }
-        oldMoveEndX = moveEndX;
-      });
     }, 20)
   </script>
 </body>
