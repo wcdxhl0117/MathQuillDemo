@@ -35,6 +35,30 @@
   <script src="https://cdn.bootcss.com/jquery/1.7.2/jquery.min.js"></script>
   <script src="https://cdn.bootcss.com/mathquill/0.10.1/mathquill.min.js"></script>
   <script type="text/javascript">
+    var nav4 = window.Event ? true : false; //初始化变量
+    function modifiers(e) { //函数:判断键盘Ctrl按键
+      if (nav4) { //对于Netscape浏览器
+        //判断是否按下Ctrl按键
+        if ((typeof e.ctrlKey != 'undefined') ? e.ctrlKey : e.modifiers & Event.CONTROL_MASK > 0) {
+          alert('恭喜你，键盘上按下的是Ctrl键!');
+        } else {
+          alert('很遗憾，键盘上按下的不是Ctrl键!');
+        }
+      } else {
+        //对于IE浏览器，判断是否按下Ctrl按键
+        if (window.event.ctrlKey) {
+          alert('恭喜你，键盘上按下的是Ctrl键!');
+        } else {
+          alert('很遗憾，键盘上按下的不是Ctrl键!');
+        }
+      }
+      return false;
+    }
+
+    $('#body').click(function(e) {
+      modifiers(e)
+    })
+
     setTimeout(function () {
       MQ = MathQuill.getInterface(MathQuill.getInterface.MAX);
       var mq = MQ.MathField($('#basic')[0], {
