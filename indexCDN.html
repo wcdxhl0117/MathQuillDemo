@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
   <title>MathQuill-basic Demo</title>
-  <link href="https://cdn.bootcss.com/mathquill/0.10.1/mathquill.min.css" rel="stylesheet">
+  <link href="./src/mathquill.2.css" rel="stylesheet">
+  <link rel="stylesheet" href="./math-input.css">
   <script type="text/javascript">
     document.documentElement.style.fontSize = document.documentElement.clientWidth / 7.5 + "px";
     window.addEventListener("resize", function () {
@@ -19,7 +20,9 @@
     width: 100%;
     font-size: 0.36rem;
     overflow-x: auto;
+    border: none;
   }
+  
 </style>
 
 <body>
@@ -33,7 +36,10 @@
     <!-- <p id="add">Add LaTeX encoding</p> -->
   </div>
   <script src="https://cdn.bootcss.com/jquery/1.7.2/jquery.min.js"></script>
-  <script src="https://cdn.bootcss.com/mathquill/0.10.1/mathquill.min.js"></script>
+  <!-- <script src="https://cdn.bootcss.com/mathquill/0.10.1/mathquill.min.js"></script> -->
+  <script src="./src/mathquill.2.js"></script>
+  <!--  ASCIImath to Latex -->
+  <script src="./acc.js"></script>
   <script type="text/javascript">
     var nav4 = window.Event ? true : false; //初始化变量
     function modifiers(e) { //函数:判断键盘Ctrl按键
@@ -73,9 +79,17 @@
       mq.focus()
 
       // Write string to cursor position
+      var str = '\\frac{ }{ }';
       setTimeout(function () {
-        mq.write('(\\frac12y)^4\\div (-\\frac12y)')
+        // str = AMTparseAMtoTeX(str)
+        mq.write(str)
       }, 100)
+
+      // 删除方法找到（模拟按键的方式）
+      setInterval(function () {
+        // mq.keystroke('Backspace')
+        // mq.keystroke('Right')
+      }, 1000)
 
       var latex = $('#basic-latex').bind('keydown keypress keyup', function () {
         var prev = latex.val();
@@ -86,11 +100,38 @@
       });
       latex.val(mq.latex());
 
-      // $("#add").click(function () {
-      //   mq.write('(\\frac12y)^4\\div (-\\frac12y)')
-      // })
-    }, 20)
+      $("#add").click(function () {
+        // 这个和write类似
+        mq.cmd('\\sqrt');
+        // 模拟键盘键
+        mq.keystroke('Shift-Left');
+      })
 
+
+      // var startX, startY, moveEndX, moveEndY, X, Y, oldMoveEndX;
+      // $("#basic").on("touchstart", function (e) {
+      //   startX = e.originalEvent.changedTouches[0].pageX,
+      //     startY = e.originalEvent.changedTouches[0].pageY;
+      // });
+      // var off = true;
+      // setInterval(function () {
+      //   off = !off;
+      // }, 60)
+      // $("#basic").on("touchmove", function (e) {
+      //   if (off) {
+      //     e.preventDefault();
+      //     moveEndX = e.originalEvent.changedTouches[0].pageX,
+      //     moveEndY = e.originalEvent.changedTouches[0].pageY;
+      //     if (moveEndX - oldMoveEndX > 0) {
+      //       mq.keystroke('Right');
+      //     } else if (moveEndX - oldMoveEndX < 0) {
+      //       mq.keystroke('Left');
+      //     }
+      //     oldMoveEndX = moveEndX;
+      //   }
+      // });
+
+    }, 20)
   </script>
 </body>
 
